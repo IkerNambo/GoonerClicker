@@ -1,0 +1,167 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+html{
+    scrollbar-color: orange rgba(19,19,19,1) ;
+}
+body{
+    height: 100vh;
+    width: 100vw;
+    background: rgb(244,161,0);
+    background: linear-gradient(180deg, rgba(244,161,0,1) 20%, rgba(19,19,19,1) 20%); 
+}
+.hidden{
+    display: none;
+}
+.title{
+    text-align: center;
+    margin-top: 2rem;
+}
+.main-wrapper{
+    box-sizing: border-box;
+    padding: 0px;
+    display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: 1fr 2fr 1fr;
+
+    margin: auto;
+    place-items: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    background-color: rgba(19,19,19,1) ;
+    width: 80%;
+    height: 80%;
+    margin-top: 1rem;
+    border-radius: 10px;
+    border-top: solid orange;
+    border-bottom: solid orange;
+    color: white;
+}
+
+.counter-wrapper{
+    justify-content: center;
+    grid-column: 2;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    
+}
+.core-wrapper{
+    text-align: center;
+    grid-column: 2;
+    grid-row: 2;
+}
+.buttons {
+    box-sizing: border-box;
+    padding-top: 5px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;
+    background: rgb(244,161,0);
+    background: linear-gradient(199deg, rgba(244,161,0,1) 36%, rgba(19,19,19,1) 36%); 
+    border-left: solid orange;
+    grid-column: 3;
+    grid-row: 1/4;
+    gap: 6px;
+  
+
+    border-radius: 10px;
+}
+.buttons button {
+    transition: .5s;
+    width: 90%;
+    height: 10%;
+    border: none;
+    background: rgb(235,235,235);
+    background: linear-gradient(8deg, rgba(235,235,235,1) 20%, rgba(255,255,255,1) 20%); 
+    border-radius: 10px;
+    border-top-right-radius: none;
+    border-bottom-right-radius: none;
+    border: solid orange;
+}
+.buttons button:hover{
+    cursor: pointer;
+    transition: .5s;
+    margin-right: 60px;
+    background: rgb(255,255,255);
+    background: linear-gradient(8deg, rgba(255,255,255,1) 80%, rgba(255,173,0,1) 80%); 
+    border: solid orange;
+}
+.buttons .buyer {
+    color: red;
+    margin: 10px;
+}
+.mainbtn{
+    grid-row: 1;
+    grid-column: 2;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    height: 90px;
+    border-radius: 100px;
+}
+#infoWrapper{
+    transition: 1s;
+    display: none;
+    flex-direction: column;
+    grid-column: 1;
+    grid-row: 1/4;
+    font-size: 15px;
+    background: rgb(105,105,105);
+    background: linear-gradient(327deg, rgba(105,105,105,1) 36%, rgba(19,19,19,1) 36%); 
+    width: 100%;
+    height: 100%;
+    border-right: solid orange;
+    border-radius: 10px;
+    p{
+        margin: 2px;
+    }
+}
+
+#nuh-uh{
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 20px;
+    text-align: center;
+    color: red;
+    background-color: rgb(11, 11, 11);
+    border-radius: 10px;
+    border-left: solid red;
+}
+
+
+@media(max-width: 500px){
+    .buttons {
+        flex-wrap: wrap;
+        align-content: first baseline;
+        display: flex;
+        flex-direction: row; 
+        justify-content: space-between;
+        align-items: center; /* Center items vertically */
+        gap: 10px; /* Add spacing between items */
+        grid-row: 3;
+        width: 100%;
+        grid-column: 1/4;
+        overflow: auto;
+    }
+    .buttons button{
+        margin: 20px;
+        width: 150px;
+        height: 100px;
+    }
+    .buttons button:hover{
+        margin: 0px;
+    }
+    #infoWrapper{
+        grid-row: 1;
+        grid-column: 1/4;
+    }
+}

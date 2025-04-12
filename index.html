@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gooner Clicker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="title">
+        
+        <h1>GOONER CLICKER (version 1.0)</h1>
+        <p>Progress does not save yet! (<a href="info.html">More info</a>)</p>
+
+    </div>
+    
+
+    <div class="main-wrapper">
+        <div class="info-wrapper" id="infoWrapper">
+            <p id="clicked"></p>
+            <p id="power">clicking powah: </p>
+            <p id="mps">money earned per second: </p>
+        </div>
+        <div class="core-wrapper">   
+            <div>
+                <p id="numberDisplay">$0</p>
+                <p id="nuh-uh"></p>
+                <button class="mainbtn" onclick="increaseNum()">click!</button>
+            </div>
+        </div>
+        <div class="buttons" id="buttons-wrapper">
+            <button id="levelUp" onclick="levelUp()" title="levels up the clicking power"></button>
+            <button id="worker" class="hidden" title="hires a worker which generates 1 gooner coin per second">hire worker</button>
+            <button id="office" class="hidden" title="buys an office which generates 10 gooner coin per second">buy an office</button>
+            <button id="building" class="hidden" title="buys a building which generates 100 gooner coin per second">buy a building</button>
+            <button id="company" class="hidden" title="buys a company which generates 1000 gooner coin per second">buy a company</button>
+            <button id="town" class="hidden" title="builds a town which generates 10000 gooner coin per second">buy a town</button>
+      
+        </div>
+    </div>
+    <script src="script.js"></script>
+    
+</body>
+</html>
