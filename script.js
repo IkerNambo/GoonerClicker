@@ -16,7 +16,7 @@ const town = document.getElementById('town');
 
 //core variables
 let number = 0;
-let clickPow = 100;
+let clickPow = 1;
 let clicks = 0;
 let mps = 0;
 let tracker;
