@@ -72,7 +72,7 @@ let numberProxy = new Proxy({value: number}, numberHandler)
 function formatPrice(price){
     let sliced;
     let exact = price.toString().charAt(1)
-    console.log(exact)
+    
     const suffixes = [
         { limit: 1_000, divisor: 1, suffix: '' },
         { limit: 10_000, divisor: 1_000, suffix: `.${exact}K` },
