@@ -1,5 +1,5 @@
 //fetching from html
-alert('Game not finished yet, your current objective is to break it, because thats how unfinished it is')
+// alert('Game not finished yet, your current objective is to break it, because thats how unfinished it is')
 const numberDisplay = document.getElementById('numberDisplay');
 const infoWrapper = document.getElementById('infoWrapper');
 const buttonsWrapper = document.getElementById('buttons-wrapper');
@@ -47,12 +47,12 @@ let townPower = 0;
 
 //sliced
 let numberSliced;
-
-let workerPriceSliced = workerPrice
-let officePriceSliced = officePrice
-let buildingPriceSliced = buildingPrice
-let companyPriceSliced = companyPrice
-let townPriceSliced = townPrice
+let levelPriceSliced = formatPrice(lvlPrice)
+let workerPriceSliced = formatPrice(workerPrice)
+let officePriceSliced = formatPrice(officePrice)
+let buildingPriceSliced = formatPrice(buildingPrice)
+let companyPriceSliced = formatPrice(companyPrice)
+let townPriceSliced = formatPrice(townPrice)
 
 console.log(localStorage)
 error.style.display = 'none';
@@ -71,20 +71,42 @@ let numberProxy = new Proxy({value: number}, numberHandler)
 
 function formatPrice(price){
     let sliced;
+    let exact = price.toString().charAt(1)
+    console.log(exact)
     const suffixes = [
         { limit: 1_000, divisor: 1, suffix: '' },
-        { limit: 10_000, divisor: 1_000, suffix: 'K' },
-        { limit: 1_000_000, divisor: 1_000, suffix: 'K' },
-        { limit: 10_000_000, divisor: 1_000_000, suffix: 'M' },
-        { limit: 1_000_000_000, divisor: 1_000_000, suffix: 'M' },
-        { limit: 10_000_000_000, divisor: 1_000_000_000, suffix: 'B' },
-        { limit: 1_000_000_000_000, divisor: 1_000_000_000, suffix: 'B' },
-        { limit: 10_000_000_000_000, divisor: 1_000_000_000_000, suffix: 'T' },
-        { limit: 1_000_000_000_000_000, divisor: 1_000_000_000_000, suffix: 'T' },
-        { limit: 10_000_000_000_000_000, divisor: 1_000_000_000_000_000, suffix: 'Qa' },
-        { limit: 1_000_000_000_000_000_000, divisor: 1_000_000_000_000_000, suffix: 'Qa' },
-        { limit: 10_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000, suffix: 'Qi' },
-        { limit: Number.MAX_SAFE_INTEGER, divisor: 1_000_000_000_000_000_000, suffix: 'Qi' }
+        { limit: 10_000, divisor: 1_000, suffix: `.${exact}K` },
+        { limit: 1_000_000, divisor: 1_000, suffix: `.${exact}K` },
+        { limit: 10_000_000, divisor: 1_000_000, suffix: `.${exact}M` },
+        { limit: 1_000_000_000, divisor: 1_000_000, suffix: `.${exact}M` },
+        { limit: 10_000_000_000, divisor: 1_000_000_000, suffix: `.${exact}B` },
+        { limit: 1_000_000_000_000, divisor: 1_000_000_000, suffix: `.${exact}B`  },
+        { limit: 10_000_000_000_000, divisor: 1_000_000_000_000, suffix: `.${exact}T` },
+        { limit: 1_000_000_000_000_000, divisor: 1_000_000_000_000, suffix: `.${exact}T` },
+        { limit: 10_000_000_000_000_000, divisor: 1_000_000_000_000_000, suffix: `.${exact}Qa` },
+        { limit: 1_000_000_000_000_000_000, divisor: 1_000_000_000_000_000, suffix: `.${exact}Qa` },
+        { limit: 10_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000, suffix: `.${exact}Qi` },
+        { limit: 1_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000, suffix: `.${exact}Qi` },
+        { limit: 10_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000, suffix: `Sx` },
+        { limit: 1_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000, suffix: `Sx` },
+        { limit: 10_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000, suffix: `Sp` },
+        { limit: 1_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000, suffix: `Sp` },
+        { limit: 10_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000_000, suffix: `.Oc` },
+        { limit: 1_000_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000_000, suffix: `.Oc` },
+        { limit: 10_000_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000_000_000, suffix: `No` },
+        { limit: 1_000_000_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000_000_000, suffix: `No` },
+        { limit: 10_000_000_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000_000_000_000, suffix: `Dc` },
+        { limit: 1_000_000_000_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000_000_000_000, suffix: `Dc` },
+        { limit: 10_000_000_000_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000_000_000_000_000, suffix: `Ud` },
+        { limit: 1_000_000_000_000_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000_000_000_000_000, suffix: `Ud`},
+        { limit: 10_000_000_000_000_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000_000_000_000_000_000, suffix: `Dd` },
+        { limit: 1_000_000_000_000_000_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000_000_000_000_000_000_000, suffix:`Dd` },
+        { limit: 10_000_000_000_000_000_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000_000_000_000_000_000_000, suffix: `Td` },
+        { limit: 1_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000_000_000_000_000_000_000, suffix: `Td` },
+        { limit: 10_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000, suffix: `Qad`},
+        { limit: 1_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000, suffix: `Qad` },
+        { limit: 10_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000, divisor: 1_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000, suffix: `Qid` },
+        { limit: Number.MAX_SAFE_INTEGER, divisor: 1_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000, suffix: 'Qid' }
     ];
     for(let {limit, divisor, suffix} of suffixes){
         if(price < limit){
@@ -92,7 +114,8 @@ function formatPrice(price){
             return sliced + suffix
         }
     }
-    return price.toString()
+    console.log('shits above')
+    return 'limit reached chief';
 }
 
 
@@ -110,9 +133,19 @@ function increaseNum(){
 }
 
 function revealItems(){
+    // update constantly 
+    level.textContent = 'level up!  $'+levelPriceSliced
+    worker.textContent = `hire worker $${workerPriceSliced}`
+    office.textContent = `buy office $${officePriceSliced}`
+    building.textContent = `buy a building $${buildingPriceSliced}`
+    company.textContent = `buy a company $${companyPriceSliced}`
+    town.textContent = `buy a town $${townPriceSliced}`
+
+    //other variables
     mpsDisplay.textContent = `money earned per second: ${tracker}` 
     numberSliced = formatPrice(numberProxy.value)
 
+    //reveal items
     if(numberProxy.value >= 100){
         buttonsWrapper.style.display = 'flex'
     }
@@ -164,8 +197,9 @@ function levelUp(){
         numberProxy.value -= lvlPrice
         numberDisplay.textContent = `$${numberSliced}`
 
-        lvlPrice *= 2
-        level.textContent = 'level up!  $'+lvlPrice
+        lvlPrice *= 3
+        levelPriceSliced = formatPrice(lvlPrice)
+        level.textContent = 'level up!  $'+levelPriceSliced
 
         document.getElementById('power').textContent = `click power: $${clickPow}`
     }
@@ -179,7 +213,13 @@ worker.addEventListener('click', () => {
         
         workerLevel++;
         numberProxy.value -= workerPrice;
-        workerPrice *= 2;
+        if (workerLevel => 10 && workerLevel < 20){
+            workerPrice *= 3
+        }
+        else if (workerLevel > 20){
+            workerPrice *= 5
+        }
+        else{workerPrice *= 2;}
 
         if(workerLevel === 1){
             workerPower = 1
@@ -207,14 +247,24 @@ office.addEventListener('click', () => {
 
         officeLevel++;
         numberProxy.value -= officePrice;
-        officePrice *= 2
 
-        if(officeLevel === 1){
-            officePower = 10
+        if (officeLevel >= 3 && officeLevel < 10){
+            officePrice *= 3;
         }
-        else{
-            officePower *=2
+        else if (officeLevel > 10){
+            officePrice *= 6;
         }
+        else {
+            officePrice *= 2;
+        }
+
+        if (officeLevel === 1){
+            officePower = 10;
+        }
+        else {
+            officePower *= 2;
+        }
+
         officePriceSliced = formatPrice(officePrice)
 
         setInterval(() =>{

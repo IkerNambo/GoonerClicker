@@ -22,6 +22,9 @@ a{
     border-radius: 100%;
     padding: 10px;
 }
+.hidden{
+    display: none;
+}
 div{
     box-sizing: border-box;
     padding: 0px;
@@ -33,7 +36,7 @@ div{
     font-size: 20px;
     background-color: rgba(19,19,19,1) ;
     width: 80%;
-    height: 80%;
+    height: fit-content;
     margin-top: 1rem;
     border-radius: 10px;
     border-top: solid orange;
@@ -41,10 +44,25 @@ div{
     color: white;
 
 }
+.new{
+    padding: 10px;
+}
+.new-wrapper{
+    padding: 10px;
+}
 
 .div2{
     height: 40%;
     padding: 10px;
+}
+.thy-buttons{
+    text-align: center;
+    display: flex;
+    padding: 10px;
+}
+.thy-buttons button{
+    border: solid orange;
+    margin: 10px;
 }
 
 audio{
