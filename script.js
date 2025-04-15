@@ -19,7 +19,7 @@ let number = 0;
 let clickPow = 1;
 let clicks = 0;
 let mps = 0;
-let tracker;
+let tracker = 'nuh uh';
 
 //prices
 let lvlPrice = 100;
@@ -47,12 +47,15 @@ let townPower = 0;
 
 //sliced
 let numberSliced;
-let levelPriceSliced = formatPrice(lvlPrice)
-let workerPriceSliced = formatPrice(workerPrice)
-let officePriceSliced = formatPrice(officePrice)
-let buildingPriceSliced = formatPrice(buildingPrice)
-let companyPriceSliced = formatPrice(companyPrice)
-let townPriceSliced = formatPrice(townPrice)
+let clickSliced;
+
+let levelPriceSliced = formatPrice(lvlPrice);;
+let workerPriceSliced = formatPrice(workerPrice);
+let officePriceSliced = formatPrice(officePrice);
+let buildingPriceSliced = formatPrice(buildingPrice);
+let companyPriceSliced = formatPrice(companyPrice);
+let townPriceSliced = formatPrice(townPrice);
+
 
 console.log(localStorage)
 error.style.display = 'none';
@@ -62,7 +65,7 @@ numberDisplay.textContent = `$${number}`;
 let numberHandler = {
     set(target, property, value){
         target[property] = value;
-        revealItems()
+        constUpdating()
         return true
     }
 }
@@ -122,17 +125,22 @@ function formatPrice(price){
 
 function increaseNum(){
     clicks++;
-
+    
+    clickSliced = formatPrice(clickPow)
     document.getElementById('clicked').textContent = `total clicks: ${clicks}`;
-    document.getElementById('power').textContent = `click power: $${clickPow}`;
+    document.getElementById('power').textContent = `click power: $${clickSliced}`;
     numberSliced = formatPrice(numberProxy.value)
 
     numberProxy.value += clickPow;
     numberDisplay.textContent = `$${numberSliced}`;
     error.style.display = 'none';
 }
+function updateTracker(power){
+    mps += power;
+    tracker = formatPrice(mps);
+}
 
-function revealItems(){
+function constUpdating(){
     // update constantly 
     level.textContent = 'level up!  $'+levelPriceSliced
     worker.textContent = `hire worker $${workerPriceSliced}`
@@ -141,9 +149,11 @@ function revealItems(){
     company.textContent = `buy a company $${companyPriceSliced}`
     town.textContent = `buy a town $${townPriceSliced}`
 
+
     //other variables
     mpsDisplay.textContent = `money earned per second: ${tracker}` 
     numberSliced = formatPrice(numberProxy.value)
+    
 
     //reveal items
     if(numberProxy.value >= 100){
@@ -182,15 +192,13 @@ function revealItems(){
         town.textContent = `buy a town $${townPriceSliced}`
         town.classList.remove('hidden')
     }
-
-    tracker = mps + workerPower + officePower + buildingPower + townPower;
 }
 
 function levelUp(){
     if (numberProxy.value < lvlPrice){
         error.textContent = 'Not enough gooner coin'
         error.style.display = 'block'
-        console.error('funciona!!!')
+
     }
     else{
         clickPow *= 2
@@ -198,10 +206,12 @@ function levelUp(){
         numberDisplay.textContent = `$${numberSliced}`
 
         lvlPrice *= 3
+
+        clickSliced = formatPrice(clickPow)
         levelPriceSliced = formatPrice(lvlPrice)
         level.textContent = 'level up!  $'+levelPriceSliced
 
-        document.getElementById('power').textContent = `click power: $${clickPow}`
+        document.getElementById('power').textContent = `click power: $${clickSliced}`
     }
 }
 
@@ -228,12 +238,13 @@ worker.addEventListener('click', () => {
             workerPower *=2
         }
         workerPriceSliced = formatPrice(workerPrice)
-    
+        updateTracker(workerPower)
+        
         setInterval(() =>{
             numberProxy.value += workerPower;
             numberDisplay.textContent = `$${numberSliced}`
         }, 1000)
-        tracker = mps + workerPower + officePower + buildingPower + townPower;
+       
     }
     else{
         error.textContent = 'Not enough gooner coin'
@@ -264,6 +275,7 @@ office.addEventListener('click', () => {
         else {
             officePower *= 2;
         }
+        updateTracker(officePower)
 
         officePriceSliced = formatPrice(officePrice)
 
@@ -271,7 +283,7 @@ office.addEventListener('click', () => {
             numberProxy.value += officePower;
             numberDisplay.textContent = `$${numberSliced}`
         }, 1000)
-        tracker = mps + workerPower + officePower + buildingPower + townPower;
+        
 
     }
     else{
@@ -283,23 +295,35 @@ office.addEventListener('click', () => {
 building.addEventListener('click', () => {
     if(numberProxy.value >= buildingPrice){
         buildingLevel++;
-        if(buildingLevel === 1){
-            buildingPower = 100
-        }
-        else{
-            buildingPower *=2
-        }
         numberProxy.value -= buildingPrice;
-        buildingPrice *= 2;
-        buildingPriceSliced = formatPrice(buildingPrice)
-        
 
+        if (buildingLevel >= 10 && buildingLevel < 20){
+            buildingPrice *= 3;
+        }
+        else if (buildingLevel > 20){
+            buildingPrice *= 5;
+        }
+        else {
+            buildingPrice *= 2;
+        }
+
+        if (buildingLevel === 1){
+            buildingPower = 100;
+        }
+        else {
+            buildingPower *= 2;
+        }
+    
+
+        updateTracker(buildingPower)
+
+        buildingPriceSliced = formatPrice(buildingPrice)
        
         setInterval(() =>{
             numberProxy.value += buildingPower;
             numberDisplay.textContent = `$${numberSliced}`;
         }, 1000);
-        tracker = mps + workerPower + officePower + buildingPower + townPower;
+       
 
     }
     else{
@@ -310,14 +334,27 @@ building.addEventListener('click', () => {
 company.addEventListener('click', () => {
     if(numberProxy.value >= companyPrice){
         companyLevel++;
-        if(companyLevel === 1){
+
+        numberProxy.value -= companyPrice;
+        
+        if (companyLevel >= 10 && companyLevel < 20){
+            companyPrice *= 3;
+        }
+        else if (companyLevel > 20){
+            companyPrice *= 5;
+        }
+        else {
+            companyPrice *= 2;
+        }
+
+        if (companyLevel === 1){
             companyPower = 1000;
         }
-        else{
+        else {
             companyPower *= 2;
         }
-        numberProxy.value -= companyPrice;
-        companyPrice *= 2;
+
+        updateTracker(companyPower)
 
         companyPriceSliced = formatPrice(companyPrice)
 
@@ -325,7 +362,7 @@ company.addEventListener('click', () => {
             numberProxy.value += companyPower;
             numberDisplay.textContent = `$${numberSliced}`;
         }, 1000);
-        tracker = mps + workerPower + officePower + buildingPower + townPower;
+       
 
     }
     else{
@@ -337,20 +374,37 @@ company.addEventListener('click', () => {
 town.addEventListener('click', () => {
     if(numberProxy.value >= townPrice){
         townLevel++;
-        if(townLevel === 1){
+        numberProxy.value -= townPrice;
+        
+        if (townLevel >= 10 && townLevel < 20){
+            townPrice *= 3;
+        }
+        else if (townLevel > 20){
+            townPrice *= 5;
+        }
+        else {
+            townPrice *= 2;
+        }
+
+        if (townLevel === 1){
             townPower = 10000;
         }
-        else{
+        else {
             townPower *= 2;
         }
-        numberProxy.value -= townPrice;
-        townPrice *= 2;
+
+
+
+        updateTracker(townPower)
         townPriceSliced = formatPrice(townPrice)
+
+
+
         setInterval(() => {
             numberProxy.value += townPower;
             numberDisplay.textContent = `$${numberSliced}`;
         }, 1000);
-        tracker = mps + workerPower + officePower + buildingPower + townPower;
+       
 
     }
     else{
